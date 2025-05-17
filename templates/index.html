@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Email Composer</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body class="bg-gray-100 min-h-screen">
+    <div class="container mx-auto px-4 py-8">
+        <h1 class="text-3xl font-bold text-center mb-8 text-gray-800">Smart Email Composer</h1>
+        
+        <!-- Document Upload Section -->
+        <div class="bg-white rounded-lg shadow-md p-6 mb-8">
+            <h2 class="text-xl font-semibold mb-4">Upload Context Documents</h2>
+            <form id="uploadForm" class="space-y-4">
+                <div class="flex items-center justify-center w-full">
+                    <label class="flex flex-col w-full h-32 border-4 border-dashed hover:bg-gray-100 hover:border-gray-300">
+                        <div class="flex flex-col items-center justify-center pt-7">
+                            <svg class="w-12 h-12 text-gray-400 group-hover:text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"/>
+                            </svg>
+                            <p class="pt-1 text-sm tracking-wider text-gray-400 group-hover:text-gray-600">
+                                Select a file
+                            </p>
+                        </div>
+                        <input type="file" class="opacity-0" accept=".txt,.pdf,.doc,.docx" />
+                    </label>
+                </div>
+                <button type="submit" class="w-full bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600 transition duration-200">
+                    Upload Document
+                </button>
+            </form>
+        </div>
+
+        <!-- Email Composition Section -->
+        <div class="bg-white rounded-lg shadow-md p-6">
+            <h2 class="text-xl font-semibold mb-4">Compose Email</h2>
+            <form id="emailForm" class="space-y-4">
+                <div>
+                    <label class="block text-sm font-medium text-gray-700">Recipient</label>
+                    <input type="email" id="recipient" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500" required>
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700">Subject</label>
+                    <input type="text" id="subject" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500" required>
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700">Context/Additional Information</label>
+                    <textarea id="context" rows="4" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"></textarea>
+                </div>
+                <button type="submit" class="w-full bg-green-500 text-white py-2 px-4 rounded hover:bg-green-600 transition duration-200">
+                    Generate Email Draft
+                </button>
+            </form>
+
+            <!-- Generated Email Display -->
+            <div id="generatedEmail" class="mt-8 hidden">
+                <h3 class="text-lg font-semibold mb-2">Generated Email</h3>
+                <div class="bg-gray-50 p-4 rounded-md">
+                    <pre id="emailDraft" class="whitespace-pre-wrap"></pre>
+                </div>
+                <div class="mt-4">
+                    <h4 class="text-sm font-medium text-gray-700">Context Used:</h4>
+                    <div id="contextUsed" class="text-sm text-gray-600 mt-1"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html> 
